@@ -24,7 +24,7 @@
 
 <div class="header">
   <h1>🌸 古月·网红INS风门头提示词生成器</h1>
-  <p>白天/夜晚｜异形造型｜字体多版本｜8K写实｜可施工</p>
+  <p>白天/夜晚｜异形造型｜字体多版本｜8K写实｜可施工｜店铺正立面完全展示</p>
 </div>
 
 <div class="main-wrap" id="mainWrap">
@@ -58,60 +58,88 @@
 <script>
 let allPrompts = [];
 
+// 随机选取数组中的一个元素
 function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 
-function genOne(industry){函数 genOne(行业){
+// 生成单条提示词
+function genOne(industry){
   const styles=["INS极简风","网红奶油风","韩式温柔风","日系治愈风","轻奢高级感","小清新ins风","低饱和ins风","韩系简约风","甜美少女风","原木温暖风","现代极简风","ins冷淡风"];
   const colors=["奶油白","奶白+浅粉","奶咖+白色","浅灰+奶白","纯白+浅蓝","淡紫+奶白","薄荷绿+白色","原木色+白色","浅杏色+白色","暖白+浅棕","高级灰+白色","马卡龙浅色系"];
   const fonts=["亚克力发光字","简约立体字","精致金属字","柔和背光字","极简无边字","清新卡通字","高级细体字","圆润可爱字","国潮风字体","手写艺术字","创意发光字","3D立体字"];
-  const qualities=["8K高清写实","白天正立面平视无遮挡","自然光实拍","干净街道背景","临街清晰正视图","专业商业摄影","明亮通透画质","100%可落地施工"];常见品质=["8K高清写实","白天正立面平视无遮挡""自然光实拍""干净街道背景""临街清晰正视图""专业商业摄影""明亮通透画质""100%可落地施工"];
+  const qualities=["8K高清写实","自然光实拍","干净街道背景","临街清晰正视图","专业商业摄影","明亮通透画质","100%可落地施工"];
   
   const time=document.getElementById("timeSelect").value;
   const shape=document.getElementById("shapeSelect").value;
   const timeDesc=time==="夜晚"?"夜晚霓虹灯、灯光氛围、霓虹反射、发光字效果":"白天自然光、平视无遮挡、柔和光照";
   const shapeDesc=shape==="平直"?"标准平直门头":shape+"异形造型";
 
-  return `${pick(styles)}${industry}门头，${pick(colors)}配色，${shapeDesc}，${pick(fonts)}，${timeDesc}，${pick(qualities)}`;
+  // 核心修改：加入「店铺正立面完全展示」，并调整原有重复的「正立面」描述
+  return `${pick(styles)}${industry}门头，店铺正立面完全展示，${pick(colors)}配色，${shapeDesc}，${pick(fonts)}，${timeDesc}，正立面平视无遮挡，${pick(qualities)}`;
 }
 
-async function generate(){异步 函数 生成(){
+// 生成20组不重复提示词
+async function generate(){
   const industry=document.getElementById('industry').value.trim();
   if(!industry){alert('请输入店铺类型');return;}
   const btn=document.getElementById('genBtn');
-  btn.disabled=true; btn.innerText='正在生成...';
+  btn.disabled=true; 
+  btn.innerText='正在生成...';
 
+  // 模拟加载延迟，提升用户体验
   await new Promise(r=>setTimeout(r,500));
 
+  // 使用Set确保不重复
   const set=new Set();
   while(set.size<20){
     set.add(genOne(industry));
   }
   allPrompts=Array.from(set);
   showResult();
-  btn.disabled=false; btn.innerText='🚀 生成20组不重复提示词';
+  
+  // 恢复按钮状态
+  btn.disabled=false; 
+  btn.innerText='🚀 生成20组不重复提示词';
 }
 
+// 展示生成的提示词
 function showResult(){
   let html='';
   allPrompts.forEach((item,i)=>{
+    // 转义单引号避免onclick语法错误
     html+=`<div class="result-item">
       <div class="item-text">${i+1}. ${item}</div>
       <button class="copy-btn" onclick="copyOne('${item.replace(/'/g,"&apos;")}',this)">复制</button>
     </div>`;
   });
+  // 添加一键复制全部按钮
   html+=`<button class="copy-all-btn" onclick="copyAll()">📋 一键复制全部</button>`;
   document.getElementById("result").innerHTML=html;
 }
 
+// 复制单条提示词
 function copyOne(txt,btn){
   navigator.clipboard.writeText(txt).then(()=>{
     btn.innerText='已复制';
     btn.style.background='#999';
+    // 2秒后恢复按钮状态
+    setTimeout(()=>{
+      btn.innerText='复制';
+      btn.style.background='#F472B6';
+    },2000);
+  }).catch(err=>{
+    alert('复制失败，请手动复制');
+    console.error('复制失败:', err);
   });
 }
 
+// 复制全部提示词
 function copyAll(){
-  navigator.clipboard.writeText(allPrompts.join('\n\n')).then(()=>{alert('✅ 已复制全部20条！');});
+  navigator.clipboard.writeText(allPrompts.join('\n\n')).then(()=>{
+    alert('✅ 已复制全部20条！');
+  }).catch(err=>{
+    alert('复制失败，请手动复制');
+    console.error('复制全部失败:', err);
+  });
 }
 </script>
 
