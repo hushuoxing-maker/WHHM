@@ -2,118 +2,53 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <title>古月·网红INS风商业门头提示词生成器</title>
+  <title>古月·网红INS风门头提示词生成器</title>
   <style>
-    *{
-      box-sizing: border-box;
-      margin:0; padding:0;
-      font-family: "Microsoft YaHei", sans-serif;
-    }
-    body{
-      background: linear-gradient(135deg, #FFF9FB 0%, #FFE8F0 100%);
-      min-height: 100vh;
-      padding-bottom: 60px;
-    }
-    .header{
-      width:100%;
-      background: linear-gradient(90deg, #F472B6, #EC4899);
-      color:#fff;
-      text-align:center;
-      padding:30px 20px;
-      border-radius:0 0 16px 16px;
-      box-shadow:0 4px 16px rgba(244,114,182,0.12);
-    }
-    .header h1{
-      font-size:26px;
-      margin-bottom:8px;
-    }
-    .header p{
-      font-size:15px;
-      opacity:0.9;
-    }
-
-    .main-wrap{
-      max-width:800px;
-      margin:0 auto;
-      padding:0 20px;
-    }
-    .input-box{
-      width:100%;
-      padding:15px;
-      border:1px solid #eee;
-      border-radius:10px;
-      font-size:16px;
-      margin-bottom:20px;
-      outline:none;
-    }
-    .input-box:focus{
-      border-color:#F472B6;
-    }
-    .gen-btn{
-      width:100%;
-      padding:16px;
-      background:linear-gradient(90deg,#F472B6,#F9A8D4);
-      color:#fff;
-      border:none;
-      border-radius:10px;
-      font-size:17px;
-      cursor:pointer;
-    }
-    .gen-btn:disabled{
-      background:#FDCFE8;
-      cursor:not-allowed;
-    }
-
-    .result-item{
-      background:#fff;
-      padding:18px;
-      border-left:4px solid #F472B6;
-      border-radius:12px;
-      margin-bottom:12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-    }
-    .item-text{
-      flex:1;
-      font-size:14px;
-      line-height:1.6;
-      color:#333;
-    }
-    .copy-btn{
-      padding:8px 12px;
-      background:#F472B6;
-      color:#fff;
-      border:none;
-      border-radius:6px;
-      font-size:13px;
-      white-space:nowrap;
-      cursor:pointer;
-    }
-    .copy-all-btn{
-      display:block;
-      margin:20px auto;
-      padding:12px 24px;
-      background:#F472B6;
-      color:#fff;
-      border:none;
-      border-radius:8px;
-      cursor:pointer;
-    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft YaHei",sans-serif;}
+    body{background: linear-gradient(135deg,#FFF9FB 0%,#FFE8F0 100%);min-height:100vh;padding-bottom:60px;}
+    .header{width:100%;background: linear-gradient(90deg,#F472B6,#EC4899);color:#fff;text-align:center;padding:30px 20px;border-radius:0 0 16px 16px;box-shadow:0 4px 16px rgba(244,114,182,0.12);}
+    .header h1{font-size:26px;margin-bottom:8px;}
+    .header p{font-size:15px;opacity:0.9;}
+    .main-wrap{max-width:800px;margin:0 auto;padding:0 20px;}
+    .input-box, select{width:100%;padding:15px;border:1px solid #eee;border-radius:10px;font-size:16px;margin-bottom:20px;outline:none;}
+    .input-box:focus, select:focus{border-color:#F472B6;}
+    .gen-btn{width:100%;padding:16px;background:linear-gradient(90deg,#F472B6,#F9A8D4);color:#fff;border:none;border-radius:10px;font-size:17px;cursor:pointer;}
+    .gen-btn:disabled{background:#FDCFE8;cursor:not-allowed;}
+    .result-item{background:#fff;padding:18px;border-left:4px solid #F472B6;border-radius:12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+    .item-text{flex:1;font-size:14px;line-height:1.6;color:#333;}
+    .copy-btn{padding:8px 12px;background:#F472B6;color:#fff;border:none;border-radius:6px;font-size:13px;white-space:nowrap;cursor:pointer;}
+    .copy-all-btn{display:block;margin:20px auto;padding:12px 24px;background:#F472B6;color:#fff;border:none;border-radius:8px;cursor:pointer;}
   </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🌸 古月·网红INS风商业门头提示词生成器</h1>
-  <p>白天正立面｜平视无遮挡｜8K写实｜100%可施工</p >
+  <h1>🌸 古月·网红INS风门头提示词生成器</h1>
+  <p>白天/夜晚｜异形造型｜字体多版本｜8K写实｜可施工</p>
 </div>
 
 <div class="main-wrap" id="mainWrap">
-  <div style="background:#fff; padding:30px; border-radius:16px; margin-bottom:30px;">
-    <div style="margin-bottom:10px; font-size:16px; font-weight:bold;">店铺行业类型</div>
+  <div style="background:#fff;padding:30px;border-radius:16px;margin-bottom:30px;">
+    <div style="margin-bottom:10px;font-size:16px;font-weight:bold;">店铺行业类型</div>
     <input class="input-box" id="industry" placeholder="例如：奶茶咖啡、甜品烘焙、美甲美睫、女装店">
+    
+    <div style="margin-bottom:10px;font-size:16px;font-weight:bold;">时间效果</div>
+    <select id="timeSelect">
+      <option value="白天">白天</option>
+      <option value="夜晚">夜晚</option>
+    </select>
+    
+    <div style="margin-bottom:10px;font-size:16px;font-weight:bold;">门头造型</div>
+    <select id="shapeSelect">
+      <option value="平直">平直</option>
+      <option value="圆弧">圆弧</option>
+      <option value="折角">折角</option>
+      <option value="波浪">波浪</option>
+      <option value="多边形">多边形</option>
+      <option value="拱形">拱形</option>
+      <option value="悬挑">悬挑</option>
+    </select>
+
     <button class="gen-btn" id="genBtn" onclick="generate()">🚀 生成20组不重复提示词</button>
   </div>
 
@@ -123,99 +58,62 @@
 <script>
 let allPrompts = [];
 
-// 随机抽取数组元素
-function pick(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+function genOne(industry){函数 genOne(行业){
+  const styles=["INS极简风","网红奶油风","韩式温柔风","日系治愈风","轻奢高级感","小清新ins风","低饱和ins风","韩系简约风","甜美少女风","原木温暖风","现代极简风","ins冷淡风"];
+  const colors=["奶油白","奶白+浅粉","奶咖+白色","浅灰+奶白","纯白+浅蓝","淡紫+奶白","薄荷绿+白色","原木色+白色","浅杏色+白色","暖白+浅棕","高级灰+白色","马卡龙浅色系"];
+  const fonts=["亚克力发光字","简约立体字","精致金属字","柔和背光字","极简无边字","清新卡通字","高级细体字","圆润可爱字","国潮风字体","手写艺术字","创意发光字","3D立体字"];
+  const qualities=["8K高清写实","白天正立面平视无遮挡","自然光实拍","干净街道背景","临街清晰正视图","专业商业摄影","明亮通透画质","100%可落地施工"];常见品质=["8K高清写实","白天正立面平视无遮挡""自然光实拍""干净街道背景""临街清晰正视图""专业商业摄影""明亮通透画质""100%可落地施工"];
+  
+  const time=document.getElementById("timeSelect").value;
+  const shape=document.getElementById("shapeSelect").value;
+  const timeDesc=time==="夜晚"?"夜晚霓虹灯、灯光氛围、霓虹反射、发光字效果":"白天自然光、平视无遮挡、柔和光照";
+  const shapeDesc=shape==="平直"?"标准平直门头":shape+"异形造型";
+
+  return `${pick(styles)}${industry}门头，${pick(colors)}配色，${shapeDesc}，${pick(fonts)}，${timeDesc}，${pick(qualities)}`;
 }
 
-// 随机生成一条不重复的提示词
-function genOne(industry) {
-  // 风格
-  const styles = [
-    "INS极简风", "网红奶油风", "韩式温柔风", "日系治愈风",
-    "轻奢高级感", "小清新ins风", "低饱和ins风", "韩系简约风",
-    "甜美少女风", "原木温暖风", "现代极简风", "ins冷淡风"
-  ];
-  // 配色
-  const colors = [
-    "奶油白", "奶白+浅粉", "奶咖+白色", "浅灰+奶白",
-    "纯白+浅蓝", "淡紫+奶白", "薄荷绿+白色", "原木色+白色",
-    "浅杏色+白色", "暖白+浅棕", "高级灰+白色", "马卡龙浅色系"
-  ];
-  // 造型
-  const shapes = [
-    "弧形圆角设计", "极简直线条", "立体简约造型",
-    "干净平整立面", "无复杂装饰", "小体量精致造型",
-    "简洁大气外观", "温柔圆润轮廓", "高级利落线条"
-  ];
-  // 字效
-  const fonts = [
-    "亚克力发光字", "简约立体字", "精致金属字",
-    "柔和背光字", "极简无边字", "清新卡通字",
-    "高级细体字", "圆润可爱字"
-  ];
-  // 画质
-  const qualities = [
-    "白天正立面平视无遮挡", "8K高清写实", "自然光实拍",
-    "干净街道背景", "临街清晰正视图", "专业商业摄影",
-    "明亮通透画质", "100%可落地施工"
-  ];
+async function generate(){异步 函数 生成(){
+  const industry=document.getElementById('industry').value.trim();
+  if(!industry){alert('请输入店铺类型');return;}
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true; btn.innerText='正在生成...';
 
-  return `${pick(styles)}${industry}门头，${pick(colors)}配色，${pick(shapes)}，${pick(fonts)}，${pick(qualities)}`;
-}
+  await new Promise(r=>setTimeout(r,500));
 
-// 生成20条不重复
-async function generate() {
-  const industry = document.getElementById('industry').value.trim();
-  if (!industry) {
-    alert('请输入店铺类型');
-    return;
-  }
-
-  const btn = document.getElementById('genBtn');
-  btn.disabled = true;
-  btn.innerText = '正在生成...';
-
-  await new Promise(r => setTimeout(r, 600));
-
-  const set = new Set();
-  while (set.size < 20) {
+  const set=new Set();
+  while(set.size<20){
     set.add(genOne(industry));
   }
-  allPrompts = Array.from(set);
+  allPrompts=Array.from(set);
   showResult();
-
-  btn.disabled = false;
-  btn.innerText = '🚀 生成20组不重复提示词';
+  btn.disabled=false; btn.innerText='🚀 生成20组不重复提示词';
 }
 
-// 展示
-function showResult() {
-  let html = '';
-  allPrompts.forEach((item, i) => {
-    html += `
-    <div class="result-item">
+function showResult(){
+  let html='';
+  allPrompts.forEach((item,i)=>{
+    html+=`<div class="result-item">
       <div class="item-text">${i+1}. ${item}</div>
-      <button class="copy-btn" onclick="copyOne('${item.replace(/'/g, "&apos;")}',this)">复制</button>
+      <button class="copy-btn" onclick="copyOne('${item.replace(/'/g,"&apos;")}',this)">复制</button>
     </div>`;
   });
-  html += `<button class="copy-all-btn" onclick="copyAll()">📋 一键复制全部</button>`;
-  document.getElementById("result").innerHTML = html;
+  html+=`<button class="copy-all-btn" onclick="copyAll()">📋 一键复制全部</button>`;
+  document.getElementById("result").innerHTML=html;
 }
 
-// 复制
-function copyOne(txt, btn) {
-  navigator.clipboard.writeText(txt).then(() => {
-    btn.innerText = '已复制';
-    btn.style.background = '#999';
+function copyOne(txt,btn){
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.innerText='已复制';
+    btn.style.background='#999';
   });
 }
 
-function copyAll() {
-  navigator.clipboard.writeText(allPrompts.join('\n\n')).then(() => {
-    alert('已复制全部20条！');
-  });
+function copyAll(){
+  navigator.clipboard.writeText(allPrompts.join('\n\n')).then(()=>{alert('✅ 已复制全部20条！');});
 }
 </script>
+
 </body>
 </html>
